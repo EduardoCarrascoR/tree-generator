@@ -1,9 +1,7 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { Node, NodewithChildren } from 'src/models/tree.interface';
+import { NodewithChildren } from 'src/models/tree.interface';
 import { data } from 'src/models/data.interface';
 import { Tree } from '../function/tree';
-import * as fs from "fs";
-import path, { dirname } from 'path';
 
 @Injectable()
 export class TreeService {
@@ -22,12 +20,7 @@ export class TreeService {
         let nodes:[] = response.data.data, i=0, index
         const tree = new Tree();
 
-        // Correccion de datos
-        //console.log(nodes)
-        
-        console.log(nodes)
         nodes = await nodes.sort((a, b) => parseFloat(a["Parent"]) - parseFloat(b["Parent"]));
-        console.log(nodes)
         
         // @@ Correccion de Nombres incompletos @@
         nodes.forEach((element:data) => {
@@ -64,13 +57,6 @@ export class TreeService {
                     break;
             }
         })
-        /* let cambiarValor = (valorABuscar, valorViejo, valorNuevo) => {
-            nodes.forEach((elemento) => { // recorremos el array
-            
-               //asignamos el valor del elemento dependiendo del valor a buscar, validamos que el valor sea el mismo y se reemplaza con el nuevo. 
-                elemento[valorABuscar] = elemento[valorABuscar] == valorViejo ? valorNuevo : elemento[valorABuscar]
-            })
-          } */
 
         //  @@ Creacion de arbol @@
         while (nodes.length > 0) {
@@ -101,13 +87,10 @@ export class TreeService {
 
                         if(Element.Parent === element2.Id) {
                             let json = {
-                                "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                "name": Element.Name/* nodes[index]["Name"] */
+                                "Id": Element.ID,
+                                "name": Element.Name
                             }
-                            children.push(json)/* 
-                            index =  nodes.findIndex((data:data) => data === Element)
-                            console.log(index, nodes[index])
-                            removed = nodes.splice(index,1) */
+                            children.push(json)
                         }
                     });
                     let node = new NodewithChildren(element2.name);
@@ -122,8 +105,8 @@ export class TreeService {
                         nodes.forEach((Element:data) => {
                             if(Element.Parent === Number(element3.Id)) {
                                 let json = {
-                                    "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                    "name": Element.Name/* nodes[index]["Name"] */
+                                    "Id": Element.ID,
+                                    "name": Element.Name
                                 }
                                 children.push(json)
                             }
@@ -143,8 +126,8 @@ export class TreeService {
                                 nodes.forEach((Element:data) => {
                                     if(Element.Parent === Number(element4.Id)) {
                                         let json = {
-                                            "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                            "name": Element.Name/* nodes[index]["Name"] */
+                                            "Id": Element.ID,
+                                            "name": Element.Name
                                         }
                                         children.push(json)
                                     }
@@ -164,8 +147,8 @@ export class TreeService {
                                         nodes.forEach((Element:data) => {
                                             if(Element.Parent === Number(element5.Id)) {
                                                 let json = {
-                                                    "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                                    "name": Element.Name/* nodes[index]["Name"] */
+                                                    "Id": Element.ID,
+                                                    "name": Element.Name
                                                 }
                                                 children.push(json)
                                             }
@@ -185,8 +168,8 @@ export class TreeService {
                                                 nodes.forEach((Element:data) => {
                                                     if(Element.Parent === Number(element6.Id)) {
                                                         let json = {
-                                                            "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                                            "name": Element.Name/* nodes[index]["Name"] */
+                                                            "Id": Element.ID,
+                                                            "name": Element.Name
                                                         }
                                                         children.push(json)
                                                     }
@@ -207,8 +190,8 @@ export class TreeService {
                                                         nodes.forEach((Element:data) => {
                                                             if(Element.Parent === Number(element7.Id)) {
                                                                 let json = {
-                                                                    "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                                                    "name": Element.Name/* nodes[index]["Name"] */
+                                                                    "Id": Element.ID,
+                                                                    "name": Element.Name
                                                                 }
                                                                 children.push(json)
                                                             }  
@@ -229,8 +212,8 @@ export class TreeService {
                                                                 nodes.forEach((Element:data) => {
                                                                     if(Element.Parent === Number(element8.Id)) {
                                                                         let json = {
-                                                                            "Id": Element.ID/* Number(nodes[index]["ID"]) */,
-                                                                            "name": Element.Name/* nodes[index]["Name"] */
+                                                                            "Id": Element.ID,
+                                                                            "name": Element.Name
                                                                         }
                                                                         children.push(json)
                                                                     }
