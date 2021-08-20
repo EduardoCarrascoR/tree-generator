@@ -1,4 +1,4 @@
-import { Node, NodewithChildren } from "../../models/tree.interface";
+import { NodewithChildren } from "../../models/tree.interface";
 
 export class Tree {
     root
@@ -17,6 +17,4 @@ export class Tree {
     getRootNode() {
         return this.root;
     }
-
-
 }
